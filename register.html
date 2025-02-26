@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar - CodePay API</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #121212; /* Fundo escuro */
+      color: #ffffff;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #000000;
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #f9a825; /* Amarelo dourado como destaque */
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #f9a825; /* Sublinhado amarelo */
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #f9a825;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .register-container {
+      background: #1e1e1e; /* Fundo escuro com contraste */
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .register-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #f9a825; /* Título amarelo */
+      text-align: center;
+    }
+
+    .register-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .register-form label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #dcdcdc; /* Cinza claro */
+    }
+
+    .register-form input {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background: #2c2c2c; /* Fundo escuro para inputs */
+      color: #ffffff;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .register-form input:focus {
+      background: #3c3c3c; /* Efeito hover nos inputs */
+      outline: none;
+    }
+
+    .register-form button {
+      background: #f9a825; /* Botão amarelo */
+      color: #121212;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .register-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .register-form p {
+      text-align: center;
+      margin-top: 1rem;
+      color: #dcdcdc; /* Cinza claro */
+    }
+
+    .register-form a {
+      color: #f9a825; /* Link amarelo */
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .register-form a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animações */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .register-container {
+        padding: 1.5rem;
+      }
+
+      .register-form button {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">CodePay API</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="plans.html">Planos</a></li>
+        <li><a href="register.html">Registrar</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="register-container">
+    <h2>Crie sua Conta</h2>
+    <form id="register-form" class="register-form">
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+
+      <label for="efipay_api_key">EFIPAY API Key:</label>
+      <input type="text" id="efipay_api_key" name="efipay_api_key" required placeholder="Insira sua chave EFIPAY">
+
+      <label for="efipay_api_secret">EFIPAY API Secret:</label>
+      <input type="password" id="efipay_api_secret" name="efipay_api_secret" required placeholder="Insira seu segredo EFIPAY">
+
+      <button type="submit" class="cta-button">Registrar</button>
+    </form>
+    <p>Já tem uma conta? <a href="login.html">Faça login aqui</a>.</p>
+  </div>
+
+  <footer style="position: fixed; bottom: 0; width: 100%; text-align: center; padding: 1rem; background: #000000; color: #ffffff;">
+    &copy; 2025 Code Projects. Desenvolvido por Lucas Dev.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
